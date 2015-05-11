@@ -1,6 +1,6 @@
 # Lumen Cors Package
 
-A Simple Cross Origin Resource Share for Lumen Framework.
+A Simple [Cross Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) for Lumen Framework.
 
 # Install
 
