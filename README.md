@@ -15,7 +15,7 @@ composer require vluzrmos/lumen-cors
 On <code>boostrap/app.php</code> register the service provider:
 
 ```php
-$app->register('Vluzrmos/LumenCors/Providers/CorsServiceProvider');
+$app->register('Vluzrmos\LumenCors\Providers\CorsServiceProvider');
 ``` 
 
 And the middleware:
@@ -23,7 +23,7 @@ And the middleware:
 ```php
 $app->middlewares([
 	//...,
-	'Vluzrmos/LumenCors/Middlewares/CorsMiddleware'
+	'Vluzrmos\LumenCors\Middlewares\CorsMiddleware'
 ]);
 ```   
 
