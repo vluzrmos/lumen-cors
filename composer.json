@@ -1,0 +1,23 @@
+{
+	"name": "vluzrmos/lumen-cors",
+	"description": "A Simple Lumen CORS.",
+	"keywords": ["Lumen","Lumen","CORS"],
+	"license": "DBAD",
+	"authors": [
+			{
+				"name": "Vagner do Carmo",
+				"email": "vluzrmos@gmail.com"
+			}
+	],
+	"require": {
+		"illuminate/support": "5.0.*",
+		"illuminate/http": "5.0.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Vluzrmos\\": "src/Vluzrmos/"
+		}
+	},
+	"minimum-stability": "stable"
+}
+		
