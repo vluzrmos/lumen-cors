@@ -1,7 +1,7 @@
 {
 	"name": "vluzrmos/lumen-cors",
 	"description": "A Simple Lumen CORS.",
-	"keywords": ["Lumen","Lumen","CORS"],
+	"keywords": ["Lumen","Laravel","CORS"],
 	"license": "DBAD",
 	"authors": [
 			{
