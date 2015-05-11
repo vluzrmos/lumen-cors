@@ -1,5 +1,7 @@
 # Lumen Cors Package
 
+[![Latest Stable Version](https://poser.pugx.org/vluzrmos/lumen-cors/v/stable)](https://packagist.org/packages/vluzrmos/lumen-cors) [![Total Downloads](https://poser.pugx.org/vluzrmos/lumen-cors/downloads)](https://packagist.org/packages/vluzrmos/lumen-cors) [![Latest Unstable Version](https://poser.pugx.org/vluzrmos/lumen-cors/v/unstable)](https://packagist.org/packages/vluzrmos/lumen-cors) [![License](https://poser.pugx.org/vluzrmos/lumen-cors/license)](https://packagist.org/packages/vluzrmos/lumen-cors)
+
 A Simple [Cross Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) for Lumen Framework.
 
 # Install
