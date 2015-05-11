@@ -21,7 +21,7 @@ $app->register('Vluzrmos\LumenCors\Providers\CorsServiceProvider');
 And the middleware:
 
 ```php
-$app->middlewares([
+$app->middleware([
 	//...,
 	'Vluzrmos\LumenCors\Middlewares\CorsMiddleware'
 ]);
