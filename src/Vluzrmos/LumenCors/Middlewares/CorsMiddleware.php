@@ -2,7 +2,6 @@
 namespace Vluzrmos\LumenCors\Middlewares;
 
 use Closure;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class CorsMiddleware {
@@ -30,10 +29,10 @@ class CorsMiddleware {
     }
 
     /**
-     * @param Response $response
-     * @return Response
+     * @param $response
+     * @return mixed
      */
-    public function setCorsHeaders(Response $response){
+    public function setCorsHeaders($response){
         foreach($this->headers as $key => $value){
             $response->header($key, $value);
         }
