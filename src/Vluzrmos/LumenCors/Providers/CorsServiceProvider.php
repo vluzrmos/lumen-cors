@@ -6,13 +6,13 @@ use Illuminate\Http\Response;
 class CorsServiceProvider extends ServiceProvider
 {
 
-    /**
-     * Register OPTIONS route to any requests
-     */
-    public function register()
-    {
+	/**
+	 * Register OPTIONS route to any requests
+	 */
+	public function register()
+	{
 		/** @var \Illuminate\Http\Request $request */
-        $request = $this->app->make('request');
+		$request = $this->app->make('request');
 
 		if($request->isMethod("options")) {
 			$this->app->options("*", function() {
