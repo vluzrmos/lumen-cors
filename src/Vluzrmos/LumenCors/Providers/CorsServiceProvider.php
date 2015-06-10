@@ -11,11 +11,14 @@ class CorsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        /** @var \Illuminate\Http\Request $request */
+		/** @var \Illuminate\Http\Request $request */
         $request = $this->app->make('request');
 
-        $this->app->options($request->path(), function(){
-            return new Response('OK', 200);
-        });
-    }
+		if($request->isMethod("options")) {
+			$this->app->options("*", function() {
+				return new Response('OK', 200);
+			});
+		}
+
+	}
 }
