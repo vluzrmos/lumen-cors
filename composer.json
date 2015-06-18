@@ -10,8 +10,8 @@
 			}
 	],
 	"require": {
-		"illuminate/support": "5.0.*",
-		"illuminate/http": "5.0.*"
+		"illuminate/support": "5.1.*",
+		"illuminate/http": "5.1.*"
 	},
 	"autoload": {
 		"psr-4": {
