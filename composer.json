@@ -4,14 +4,14 @@
 	"keywords": ["Lumen","Laravel","CORS"],
 	"license": "DBAD",
 	"authors": [
-			{
-				"name": "Vagner do Carmo",
-				"email": "vluzrmos@gmail.com"
-			}
+		{
+			"name": "Vagner do Carmo",
+			"email": "vluzrmos@gmail.com"
+		}
 	],
 	"require": {
-		"illuminate/support": "5.0.*",
-		"illuminate/http": "5.0.*"
+		"illuminate/support": "5.0.*|5.1.*",
+		"illuminate/http": "5.0.*|5.1.*"
 	},
 	"autoload": {
 		"psr-4": {
