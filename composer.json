@@ -1,12 +1,12 @@
 {
-	"name": "omarusman/lumen-cors",
+	"name": "vluzrmos/lumen-cors",
 	"description": "A Simple Lumen CORS.",
 	"keywords": ["Lumen","Laravel","CORS"],
 	"license": "DBAD",
 	"authors": [
 			{
-				"name": "Omar Usman",
-				"email": "oomarusman@gmail.com"
+				"name": "Vagner do Carmo",
+				"email": "vluzrmos@gmail.com"
 			}
 	],
 	"require": {
