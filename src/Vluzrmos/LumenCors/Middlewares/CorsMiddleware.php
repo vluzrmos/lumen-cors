@@ -27,6 +27,10 @@ class CorsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->isMethod('options')) {
+            return $this->setCorsHeaders(new Response('OK'));
+        }
+
         $response = $next($request);
         
         return $this->setCorsHeaders($response);

@@ -7,18 +7,11 @@ use Illuminate\Http\Response;
 
 class CorsServiceProvider extends ServiceProvider
 {
-    /**
-     * Register OPTIONS route to any requests.
+    /*
+     * Keeping that for compatibility,
+     * That will be no longer necessary on version 1.1.*
      */
     public function register()
     {
-        /** @var \Illuminate\Http\Request $request */
-        $request = $this->app->make('request');
-
-        if ($request->isMethod("options")) {
-            $this->app->options($request->path(), function () {
-                return new Response('OK', 200);
-            });
-        }
     }
 }
