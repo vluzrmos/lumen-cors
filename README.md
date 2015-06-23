@@ -12,13 +12,7 @@ composer require vluzrmos/lumen-cors
 
 # Configure
 
-On <code>boostrap/app.php</code> register the service provider:
-
-```php
-$app->register('Vluzrmos\LumenCors\Providers\CorsServiceProvider');
-``` 
-
-And the middleware:
+On <code>boostrap/app.php</code> register the middleware:
 
 ```php
 $app->middleware([
@@ -26,6 +20,7 @@ $app->middleware([
 	'Vluzrmos\LumenCors\Middlewares\CorsMiddleware'
 ]);
 ```   
+> You are free to use ::class notation.
 
 
 And that is it!
