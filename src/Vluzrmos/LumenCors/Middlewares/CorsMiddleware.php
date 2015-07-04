@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
+/**
+ * Class CorsMiddleware
+ * @package Vluzrmos\LumenCors\Middlewares
+ */
 class CorsMiddleware
 {
     /**
@@ -15,16 +19,15 @@ class CorsMiddleware
      */
     protected $headers = [
         'Access-Control-Allow-Origin' => '*',
-        'Access-Control-Allow-Methods'=> 'POST, GET, OPTIONS, PUT, DELETE',
-        'Access-Control-Allow-Headers'=> 'Content-Type, X-Auth-Token, Origin',
-        'Access-Control-Allow-Credentials'=> 'true'
+        'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+        'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Origin',
+        'Access-Control-Allow-Credentials' => 'true',
     ];
 
     /**
      * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
@@ -39,15 +42,25 @@ class CorsMiddleware
     }
 
     /**
+     * Set the Cors headers to a given response.
      * @param SymfonyResponse $response
      * @return SymfonyResponse
      */
     public function setCorsHeaders(SymfonyResponse $response)
     {
-        foreach ($this->headers as $key => $value) {
+        foreach ($this->getCorsHeaders() as $key => $value) {
             $response->headers->set($key, $value);
         }
 
         return $response;
+    }
+
+    /**
+     * Cors Headers.
+     * @return array
+     */
+    public function getCorsHeaders()
+    {
+        return $this->headers;
     }
 }
