@@ -24,7 +24,3 @@ $app->middleware([
 
 
 And that is it!
-
-# License
-
-[DBAD](http://www.dbad-license.org/).

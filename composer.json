@@ -2,7 +2,7 @@
 	"name": "vluzrmos/lumen-cors",
 	"description": "A Simple Lumen CORS.",
 	"keywords": ["Lumen","Laravel","CORS"],
-	"license": "DBAD",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Vagner do Carmo",
@@ -26,8 +26,6 @@
 		"psr-4": {
 			"Vluzrmos\\LumenCors\\": "tests/"
 		}
-	},
-	
-	"minimum-stability": "stable"
+	}
 }
 		
