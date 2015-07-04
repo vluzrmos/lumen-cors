@@ -5,6 +5,7 @@ namespace Vluzrmos\LumenCors\Middlewares;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class CorsMiddleware
 {
@@ -33,18 +34,18 @@ class CorsMiddleware
         }
 
         $response = $next($request);
-        
+
         return $this->setCorsHeaders($response);
     }
 
     /**
-     * @param $response
-     * @return mixed
+     * @param SymfonyResponse $response
+     * @return SymfonyResponse
      */
-    public function setCorsHeaders($response)
+    public function setCorsHeaders(SymfonyResponse $response)
     {
         foreach ($this->headers as $key => $value) {
-            $response->header($key, $value);
+            $response->headers->set($key, $value);
         }
 
         return $response;
