@@ -5,8 +5,7 @@ namespace Vluzrmos\LumenCors;
 use Illuminate\Http\Request;
 
 /**
- * Class CorsMiddlewareTest
- * @package Vluzrmos\LumenCors
+ * Class CorsMiddlewareTest.
  */
 class CorsMiddlewareTest extends AbstractTestCase
 {
@@ -66,6 +65,6 @@ class CorsMiddlewareTest extends AbstractTestCase
             $this->assertEquals($value, $response->headers->get($key));
         }
 
-        $this->assertStringMatchesFormat("File was downloaded!", file_get_contents($response->getFile()));
+        $this->assertStringMatchesFormat('File was downloaded!', file_get_contents($response->getFile()));
     }
 }
