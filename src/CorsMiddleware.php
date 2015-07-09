@@ -1,6 +1,6 @@
 <?php
 
-namespace Vluzrmos\LumenCors\Middlewares;
+namespace Vluzrmos\LumenCors;
 
 use Closure;
 use Illuminate\Http\Request;

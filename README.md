@@ -6,12 +6,12 @@
 
 A Simple [Cross Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS) for Lumen Framework.
 
-Note: That should works fine on Laravel Framework too, but the tests are performed to Lumen.
+> Note: That should works fine on Laravel Framework too, but the tests are performed to Lumen.
 
 # Install
 
 ```bash
-composer require vluzrmos/lumen-cors
+composer require "vluzrmos/lumen-cors=1.2.*"
 ```
 
 # Configure
@@ -21,7 +21,7 @@ On <code>boostrap/app.php</code> register the middleware:
 ```php
 $app->middleware([
 	//...,
-	'Vluzrmos\LumenCors\Middlewares\CorsMiddleware'
+	'Vluzrmos\LumenCors\CorsMiddleware'
 ]);
 ```
 
@@ -32,8 +32,8 @@ And that is it!
 
 # Considerations
 
-That package stands to be free of configurations,
-if you want a more configurable package consider to see one of these:
+That package stands to be free of configurations, then if you want a more
+configurable package please consider to see one of these:
 
-- [Barryvdh/Laravel Cors](https://github.com/barryvdh/laravel-cors)
-- [Nordsoft/Lumen Cors](https://github.com/nordsoftware/lumen-cors)
+- [Barryvdh/LaravelCors](https://github.com/barryvdh/laravel-cors)
+- [Nordsoftware/LumenCors](https://github.com/nordsoftware/lumen-cors)

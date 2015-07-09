@@ -14,7 +14,7 @@ class CorsMiddlewareTest extends AbstractTestCase
      */
     public function testShouldSeeOKToMethodOptions()
     {
-        $middleware = new Middlewares\CorsMiddleware();
+        $middleware = new CorsMiddleware();
 
         /** @var \Illuminate\Http\Request $request */
         $request = Request::create('http://localhost', 'OPTIONS');
@@ -31,7 +31,7 @@ class CorsMiddlewareTest extends AbstractTestCase
      */
     public function testShouldSeeWelcomeWithCorsHeaders()
     {
-        $middleware = new Middlewares\CorsMiddleware();
+        $middleware = new CorsMiddleware();
 
         /** @var \Illuminate\Http\Request $request */
         $request = Request::create('http://localhost', 'GET');
@@ -52,7 +52,7 @@ class CorsMiddlewareTest extends AbstractTestCase
      */
     public function testShouldDownloadWithCorsHeaders()
     {
-        $middleware = new Middlewares\CorsMiddleware();
+        $middleware = new CorsMiddleware();
 
         /** @var \Illuminate\Http\Request $request */
         $request = Request::create('http://localhost', 'GET');
