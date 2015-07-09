@@ -13,15 +13,38 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 class CorsMiddleware
 {
     /**
-     * Access Control Headers.
-     * @var array
+     * Request Origin.
+     * @var string
      */
-    protected $headers = [
-        'Access-Control-Allow-Origin' => '*',
-        'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-        'Access-Control-Allow-Headers' => 'Authorization, Content-Type, Origin, X-Auth-Token, X-Requested-With',
-        'Access-Control-Allow-Credentials' => 'true',
+    protected $allowedOrigin = "*";
+
+    /**
+     * HTTP Verbs.
+     * @var string|array
+     */
+    protected $allowedMethods = 'POST, GET, OPTIONS, PUT, DELETE';
+
+    /**
+     * HTTP Headers.
+     * @var string|array
+     */
+    protected $allowedHeaders = [
+        'Accept', //Allow specify spected content-type
+        'Authorization', //Allow Authentication Methods
+        'Content-Type', //Allow specify sented content-type
+        'Origin', //Request origin header
+        'X-Auth-Token', //Allow Auth Token
+        'X-Csrf-Token', //Allow CSRF Token
+        'X-XSRF-TOKEN', //Allow CSRF Token
+        'X-Requested-With', //Allow Ajax XmlHttpRequest
     ];
+
+    /**
+     * Allowed Credentials.
+     * @var string
+     */
+    protected $allowedCredentials = 'true';
+
 
     /**
      * Handle an incoming request.
@@ -60,6 +83,11 @@ class CorsMiddleware
      */
     public function getCorsHeaders()
     {
-        return $this->headers;
+        return [
+            'Access-Control-Allow-Origin' => commaSeparated($this->allowedOrigin),
+            'Access-Control-Allow-Methods' => commaSeparated($this->allowedMethods),
+            'Access-Control-Allow-Headers' => commaSeparated($this->allowedHeaders),
+            'Access-Control-Allow-Credentials' => commaSeparated($this->allowedCredentials),
+        ];
     }
 }
