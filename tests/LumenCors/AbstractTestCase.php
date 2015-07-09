@@ -1,15 +1,26 @@
 <?php
 
-namespace Vluzrmos\LumenCors;
+namespace Vluzrmos\LumenCors\Testing;
 
 use Illuminate\Http\Request;
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use Laravel\Lumen\Application;
+use Laravel\Lumen\Testing\TestCase;
+use Vluzrmos\LumenCors\CorsMiddleware;
+use Vluzrmos\LumenCors\CorsService;
 
 /**
  * Class AbstractTestCase.
  */
-abstract class AbstractTestCase extends OrchestraTestCase
+abstract class AbstractTestCase extends TestCase
 {
+    /**
+     * @return Application
+     */
+    public function createApplication()
+    {
+        return require __DIR__.'/../bootstrap.php';
+    }
+
     /**
      * Creates an instance of CorsMiddleware.
      * @return CorsMiddleware
@@ -71,10 +82,21 @@ abstract class AbstractTestCase extends OrchestraTestCase
 
         $request->setMethod($method);
 
+        /** @var  $cors */
         $cors = $this->createCorsService();
 
         $this->assertFalse($cors->isPreflightRequest($request));
 
         return $request;
+    }
+
+    /**
+     * Get path to stub.
+     * @param string $path
+     * @return string
+     */
+    protected function stubsPath($path = null)
+    {
+        return __DIR__.'/../stubs'.($path ? '/'.trim($path, '/') : '');
     }
 }

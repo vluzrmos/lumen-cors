@@ -1,6 +1,6 @@
 <?php
 
-namespace Vluzrmos\LumenCors;
+namespace Vluzrmos\LumenCors\Testing;
 
 /**
  * Class CorsMiddlewareTest.
@@ -19,7 +19,6 @@ class CorsMiddlewareTest extends AbstractTestCase
         $verbs = ['GET', 'PUT', 'PATCH', 'POST', 'DELETE', 'HEAD', 'ANYOTHER'];
 
         foreach ($requestedMethods as $method) {
-            /** @var \Illuminate\Http\Request $request */
             $request = $this->createPreflightRequest($method);
 
             $response = $middleware->handle($request, function ($request) {
@@ -52,7 +51,6 @@ class CorsMiddlewareTest extends AbstractTestCase
         $cors = $this->createCorsService();
 
         foreach ($verbs as $http) {
-            /** @var \Illuminate\Http\Request $request */
             $request = $this->createRequest($http);
 
             $response = $middleware->handle($request, function ($request) {
@@ -74,11 +72,10 @@ class CorsMiddlewareTest extends AbstractTestCase
     {
         $middleware = $this->createCorsMiddleware();
 
-        /** @var \Illuminate\Http\Request $request */
         $request = $this->createRequest();
 
         $response = $middleware->handle($request, function ($request) {
-            return response()->download(__DIR__.'/stubs/download.txt');
+            return response()->download($this->stubsPath('download.txt'));
         });
 
         $cors = $middleware->getCorsService();
