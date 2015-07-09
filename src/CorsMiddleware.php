@@ -19,7 +19,7 @@ class CorsMiddleware
     protected $headers = [
         'Access-Control-Allow-Origin' => '*',
         'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-        'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, X-Requested-With, Origin',
+        'Access-Control-Allow-Headers' => 'Authorization, Content-Type, Origin, X-Auth-Token, X-Requested-With',
         'Access-Control-Allow-Credentials' => 'true',
     ];
 
