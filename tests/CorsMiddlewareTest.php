@@ -2,8 +2,6 @@
 
 namespace Vluzrmos\LumenCors;
 
-use Illuminate\Http\Request;
-
 /**
  * Class CorsMiddlewareTest.
  */
@@ -12,18 +10,22 @@ class CorsMiddlewareTest extends AbstractTestCase
     /**
      * @return void
      */
-    public function testShouldSeeOKToMethodOptions()
+    public function testShouldHandlePreflightRequest()
     {
-        $middleware = new CorsMiddleware();
+        $middleware = $this->createCorsMiddleware();
 
-        /** @var \Illuminate\Http\Request $request */
-        $request = Request::create('http://localhost', 'OPTIONS');
+        $requestedMethods = ['get', 'post', 'delete', 'put', 'patch', 'head', 'options', 'anyMethod'];
 
-        $response = $middleware->handle($request, function ($request) {
-            return response('Welcome!');
-        });
+        foreach ($requestedMethods as $method) {
+            /** @var \Illuminate\Http\Request $request */
+            $request = $this->createPreflightRequest($method);
 
-        $this->assertEquals('OK', $response->getContent());
+            $response = $middleware->handle($request, function ($request) {
+                return response('Welcome!');
+            });
+
+            $this->assertEquals('OK', $response->getContent());
+        }
     }
 
     /**
@@ -31,16 +33,18 @@ class CorsMiddlewareTest extends AbstractTestCase
      */
     public function testShouldSeeWelcomeWithCorsHeaders()
     {
-        $middleware = new CorsMiddleware();
+        $middleware = $this->createCorsMiddleware();
 
         /** @var \Illuminate\Http\Request $request */
-        $request = Request::create('http://localhost', 'GET');
+        $request = $this->createRequest();
 
         $response = $middleware->handle($request, function ($request) {
             return response('Welcome!');
         });
 
-        foreach ($middleware->getCorsHeaders() as $key => $value) {
+        $cors = $this->createCorsService();
+
+        foreach ($cors->getCorsHeaders() as $key => $value) {
             $this->assertEquals($value, $response->headers->get($key));
         }
 
@@ -52,16 +56,18 @@ class CorsMiddlewareTest extends AbstractTestCase
      */
     public function testShouldDownloadWithCorsHeaders()
     {
-        $middleware = new CorsMiddleware();
+        $middleware = $this->createCorsMiddleware();
 
         /** @var \Illuminate\Http\Request $request */
-        $request = Request::create('http://localhost', 'GET');
+        $request = $this->createRequest();
 
         $response = $middleware->handle($request, function ($request) {
             return response()->download(__DIR__.'/stubs/download.txt');
         });
 
-        foreach ($middleware->getCorsHeaders() as $key => $value) {
+        $cors = $middleware->getCorsService();
+
+        foreach ($cors->getCorsHeaders() as $key => $value) {
             $this->assertEquals($value, $response->headers->get($key));
         }
 

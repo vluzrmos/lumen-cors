@@ -5,7 +5,6 @@ namespace Vluzrmos\LumenCors;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
  * Class CorsMiddleware.
@@ -13,37 +12,19 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 class CorsMiddleware
 {
     /**
-     * Request Origin.
-     * @var string
+     * LumenCors Service.
+     * @var CorsService
      */
-    protected $allowedOrigin = '*';
+    private $cors;
 
     /**
-     * HTTP Verbs.
-     * @var string|array
+     * A middleware to handle Cors Preflighted Requests.
+     * @param \Vluzrmos\LumenCors\CorsService $cors
      */
-    protected $allowedMethods = 'POST, GET, OPTIONS, PUT, DELETE';
-
-    /**
-     * HTTP Headers.
-     * @var string|array
-     */
-    protected $allowedHeaders = [
-        'Accept', //Allow specify spected content-type
-        'Authorization', //Allow Authentication Methods
-        'Content-Type', //Allow specify sented content-type
-        'Origin', //Request origin header
-        'X-Auth-Token', //Allow Auth Token
-        'X-Csrf-Token', //Allow CSRF Token
-        'X-XSRF-TOKEN', //Allow CSRF Token
-        'X-Requested-With', //Allow Ajax XmlHttpRequest
-    ];
-
-    /**
-     * Allowed Credentials.
-     * @var string
-     */
-    protected $allowedCredentials = 'true';
+    public function __construct(CorsService $cors)
+    {
+        $this->cors = $cors;
+    }
 
     /**
      * Handle an incoming request.
@@ -53,40 +34,34 @@ class CorsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->isMethod('options')) {
-            return $this->setCorsHeaders(new Response('OK'));
+        $this->setTrustedProxiesForRequest($request);
+
+        if ($this->cors->isPreflightRequest($request)) {
+            return $this->cors->setCorsHeaders(new Response('OK'));
         }
 
         $response = $next($request);
 
-        return $this->setCorsHeaders($response);
+        return $this->cors->setCorsHeaders($response);
     }
 
     /**
-     * Set the Cors headers to a given response.
-     * @param SymfonyResponse $response
-     * @return SymfonyResponse
+     * Set trusted proxies for the request.
+     * @param \Illuminate\Http\Request $request
      */
-    public function setCorsHeaders(SymfonyResponse $response)
+    public function setTrustedProxiesForRequest(Request $request)
     {
-        foreach ($this->getCorsHeaders() as $key => $value) {
-            $response->headers->set($key, $value);
+        if (empty($request->getTrustedProxies())) {
+            $request->setTrustedProxies($request->getClientIps());
         }
-
-        return $response;
     }
 
     /**
-     * Cors Headers.
-     * @return array
+     * Get the instance of Cors Service.
+     * @return \Vluzrmos\LumenCors\CorsService
      */
-    public function getCorsHeaders()
+    public function getCorsService()
     {
-        return [
-            'Access-Control-Allow-Origin' => commaSeparated($this->allowedOrigin),
-            'Access-Control-Allow-Methods' => commaSeparated($this->allowedMethods),
-            'Access-Control-Allow-Headers' => commaSeparated($this->allowedHeaders),
-            'Access-Control-Allow-Credentials' => commaSeparated($this->allowedCredentials),
-        ];
+        return $this->cors;
     }
 }
