@@ -8,8 +8,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 /**
- * Class CorsMiddleware
- * @package Vluzrmos\LumenCors\Middlewares
+ * Class CorsMiddleware.
  */
 class CorsMiddleware
 {
@@ -20,7 +19,7 @@ class CorsMiddleware
     protected $headers = [
         'Access-Control-Allow-Origin' => '*',
         'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
-        'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, Origin',
+        'Access-Control-Allow-Headers' => 'Content-Type, X-Auth-Token, X-Requested-With, Origin',
         'Access-Control-Allow-Credentials' => 'true',
     ];
 
