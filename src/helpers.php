@@ -1,7 +1,6 @@
 <?php
 
 if (!function_exists('commaSeparated')) {
-
     /**
      * Parse an array into a comma separated string.
      * @param string|array $value
@@ -12,4 +11,3 @@ if (!function_exists('commaSeparated')) {
         return is_array($value) ? implode(', ', $value) : $value;
     }
 }
-

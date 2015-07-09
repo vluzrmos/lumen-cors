@@ -16,7 +16,7 @@ class CorsMiddleware
      * Request Origin.
      * @var string
      */
-    protected $allowedOrigin = "*";
+    protected $allowedOrigin = '*';
 
     /**
      * HTTP Verbs.
@@ -44,7 +44,6 @@ class CorsMiddleware
      * @var string
      */
     protected $allowedCredentials = 'true';
-
 
     /**
      * Handle an incoming request.
