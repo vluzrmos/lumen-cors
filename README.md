@@ -11,7 +11,7 @@ A Simple [Cross Origin Resource Sharing](https://developer.mozilla.org/en-US/doc
 # Install
 
 ```bash
-composer require "vluzrmos/lumen-cors=1.2.*"
+composer require "vluzrmos/lumen-cors=2.0.*"
 ```
 
 # Configure
