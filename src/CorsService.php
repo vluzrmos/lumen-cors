@@ -26,7 +26,20 @@ class CorsService
      * HTTP Headers.
      * @var string|array
      */
-    protected $allowedHeaders = '*';
+    protected $allowedHeaders = [
+        'Accept', //Allow specify accepted content-type
+        'Accept-Encoding', //Allow specify accepted encoding
+        'Accept-Language', //Allow specify accepted language
+        'Authorization', //Allow Authentication Methods
+        'Content-Type', //Allow specify sent content-type
+        'Origin', //Request origin header
+        'X-Auth-Token', //Allow Auth Token
+        'X-PJAX', //Allow PJAX content negotiation
+        'X-Csrf-Token', //Allow CSRF Token
+        'X-XSRF-TOKEN', //Allow CSRF Token
+        'X-HTTP-METHOD-OVERRIDE', //Allow Spoofing HTTP Method
+        'X-Requested-With', //Allow Ajax XmlHttpRequest
+    ];
 
     /**
      * Allowed Credentials.
