@@ -55,8 +55,8 @@ class CorsService
      */
     public function isPreflightRequest(Request $request)
     {
-        return $request->headers->has('Origin') &&
-            $request->getMethod() == 'OPTIONS';
+        // Simple verification of preflight.
+        return $request->getMethod() == 'OPTIONS';
     }
 
     /**
