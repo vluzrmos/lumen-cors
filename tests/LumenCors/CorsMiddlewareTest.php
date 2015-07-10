@@ -57,7 +57,7 @@ class CorsMiddlewareTest extends AbstractTestCase
                 return response('Welcome!');
             });
 
-            foreach ($cors->getCorsHeaders() as $key => $value) {
+            foreach ($cors->getCorsHeaders($request) as $key => $value) {
                 $this->assertEquals($value, $response->headers->get($key));
             }
 
@@ -80,7 +80,7 @@ class CorsMiddlewareTest extends AbstractTestCase
 
         $cors = $middleware->getCorsService();
 
-        foreach ($cors->getCorsHeaders() as $key => $value) {
+        foreach ($cors->getCorsHeaders($request) as $key => $value) {
             $this->assertEquals($value, $response->headers->get($key));
         }
 

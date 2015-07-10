@@ -37,12 +37,12 @@ class CorsMiddleware
         $this->setTrustedProxiesForRequest($request);
 
         if ($this->cors->isPreflightRequest($request)) {
-            return $this->cors->setCorsHeaders(new Response('OK'));
+            return $this->cors->setCorsHeaders(new Response('OK'), $request);
         }
 
         $response = $next($request);
 
-        return $this->cors->setCorsHeaders($response);
+        return $this->cors->setCorsHeaders($response, $request);
     }
 
     /**

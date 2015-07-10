@@ -11,43 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 class CorsService
 {
     /**
-     * Request Origin.
-     * @var string
-     */
-    protected $allowedOrigin = '*';
-
-    /**
-     * HTTP Verbs.
-     * @var string|array
-     */
-    protected $allowedMethods = 'DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT';
-
-    /**
-     * HTTP Headers.
-     * @var string|array
-     */
-    protected $allowedHeaders = [
-        'Accept', //Allow specify accepted content-type
-        'Accept-Encoding', //Allow specify accepted encoding
-        'Accept-Language', //Allow specify accepted language
-        'Authorization', //Allow Authentication Methods
-        'Content-Type', //Allow specify sent content-type
-        'Origin', //Request origin header
-        'X-Auth-Token', //Allow Auth Token
-        'X-PJAX', //Allow PJAX content negotiation
-        'X-Csrf-Token', //Allow CSRF Token
-        'X-XSRF-TOKEN', //Allow CSRF Token
-        'X-HTTP-METHOD-OVERRIDE', //Allow Spoofing HTTP Method
-        'X-Requested-With', //Allow Ajax XmlHttpRequest
-    ];
-
-    /**
-     * Allowed Credentials.
-     * @var string
-     */
-    protected $allowedCredentials = 'true';
-
-    /**
      * Check if request is preflight.
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
      * @param Request $request
@@ -63,11 +26,12 @@ class CorsService
     /**
      * Set the Cors headers to a given response.
      * @param Response $response
+     * @param Request  $request
      * @return Response
      */
-    public function setCorsHeaders(Response $response)
+    public function setCorsHeaders(Response $response, Request $request)
     {
-        foreach ($this->getCorsHeaders() as $key => $value) {
+        foreach ($this->getCorsHeaders($request) as $key => $value) {
             $response->headers->set($key, $value);
         }
 
@@ -76,15 +40,28 @@ class CorsService
 
     /**
      * Cors Headers.
+     * @param Request $request
      * @return array
      */
-    public function getCorsHeaders()
+    public function getCorsHeaders(Request $request)
     {
+        $headers = 'Authorization, X-Requested-With, X-Auth-Token, Content-Type';
+
+        if ($request->headers->has('Access-Control-Request-Headers')) {
+            $headers = $request->headers->get('Access-Control-Request-Headers');
+        }
+
+        $methods = 'DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT';
+
+        if ($request->headers->has('Access-Control-Request-Method')) {
+            $methods = $request->headers->get('Access-Control-Request-Method');
+        }
+
         return [
-            'Access-Control-Allow-Origin' => commaSeparated($this->allowedOrigin),
-            'Access-Control-Allow-Methods' => commaSeparated($this->allowedMethods),
-            'Access-Control-Allow-Headers' => commaSeparated($this->allowedHeaders),
-            'Access-Control-Allow-Credentials' => commaSeparated($this->allowedCredentials),
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Methods' => $methods,
+            'Access-Control-Allow-Headers' => $headers,
+            'Access-Control-Allow-Credentials' => 'true',
         ];
     }
 }
