@@ -52,7 +52,13 @@ class CorsMiddleware
     public function setTrustedProxiesForRequest(Request $request)
     {
         if (empty($request->getTrustedProxies())) {
-            $request->setTrustedProxies($request->getClientIps());
+            $args = [$request->getClientIps()];
+            
+            if (defined('\Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_ALL') {
+                array_push($args, Request::HEADER_X_FORWARDED_ALL);
+            }
+                
+            call_user_func_array([$request, 'setTrustedProxies'], $args);
         }
     }
 
