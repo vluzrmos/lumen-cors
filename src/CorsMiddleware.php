@@ -54,7 +54,7 @@ class CorsMiddleware
         if (empty($request->getTrustedProxies())) {
             $args = [$request->getClientIps()];
             
-            if (defined('\Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_ALL') {
+            if (defined('\Symfony\Component\HttpFoundation\Request::HEADER_X_FORWARDED_ALL')) {
                 array_push($args, Request::HEADER_X_FORWARDED_ALL);
             }
                 
