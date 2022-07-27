@@ -1,3 +1,7 @@
+# [ABANDONED] 
+Please consider to use [fruitcake/laravel-cors](https://github.com/fruitcake/laravel-cors), that is part of Laravel core.
+
+
 # Lumen Cors Package
 
 [![Join the chat at https://gitter.im/vluzrmos/lumen-cors](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vluzrmos/lumen-cors?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
